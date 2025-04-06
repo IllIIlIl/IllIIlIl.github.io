@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Puzzle Generator Startup Panel – Model HGC1600JS6NE6W1AC</title>
     <style>
+      /* Global Styles */
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Courier New", monospace;
+        background-color: #121212;
+        color: #f0f0f0;
+        margin: 0;
         padding: 2rem;
-        background: #f4f4f4;
       }
       .panel {
-        background: #fff;
+        background-color: #1e1e1e;
+        border: 1px solid #333;
         padding: 2rem;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         max-width: 900px;
         margin: auto;
       }
@@ -22,6 +26,7 @@
       h3 {
         margin-top: 0;
       }
+      /* Form elements */
       .form-group {
         margin-bottom: 1.2rem;
       }
@@ -32,6 +37,8 @@
       input[type="checkbox"],
       input[type="radio"] {
         margin-right: 0.5rem;
+        /* Custom dark switch style for checkboxes */
+        accent-color: limegreen;
       }
       select,
       input[type="range"] {
@@ -39,10 +46,15 @@
         font-size: 1rem;
         width: 100%;
         margin-bottom: 0.5rem;
+        background-color: #333;
+        color: #f0f0f0;
+        border: 1px solid #555;
+        border-radius: 4px;
       }
+      /* Buttons */
       button {
         padding: 0.7rem 1.5rem;
-        background-color: green;
+        background-color: #006400;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -50,13 +62,18 @@
         font-size: 1rem;
       }
       button:disabled {
-        background-color: gray;
+        background-color: #555;
       }
+      .hold-button {
+        background-color: darkorange;
+      }
+      /* Sections */
       .section {
-        border: 1px solid #ddd;
+        border: 1px solid #444;
         padding: 1rem;
         margin-bottom: 1rem;
         border-radius: 5px;
+        background-color: #252525;
       }
       /* EPA LED Animation */
       @keyframes flash {
@@ -80,7 +97,7 @@
       .flashing {
         animation: flash 0.5s linear 3;
       }
-      /* Master Selector Toggle */
+      /* Master Selector Toggle (Dark Style) */
       .toggle {
         position: relative;
         display: inline-block;
@@ -97,7 +114,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #ccc;
+        background-color: #555;
         transition: 0.4s;
         border-radius: 15px;
       }
@@ -108,12 +125,12 @@
         width: 26px;
         left: 2px;
         bottom: 2px;
-        background-color: white;
+        background-color: #ddd;
         transition: 0.4s;
         border-radius: 50%;
       }
       input:checked + .slider {
-        background-color: green;
+        background-color: limegreen;
       }
       input:checked + .slider:before {
         transform: translateX(30px);
@@ -133,50 +150,16 @@
       .color-preview {
         width: 40px;
         height: 40px;
-        border: 1px solid #000;
+        border: 1px solid #f0f0f0;
         display: inline-block;
         vertical-align: middle;
         margin-left: 10px;
-      }
-      /* Hold Button Style */
-      .hold-button {
-        padding: 0.7rem 1.5rem;
-        background-color: darkorange;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
       }
     </style>
   </head>
   <body>
     <div class="panel">
       <h2>Puzzle Startup Panel – Model HGC1600JS6NE6W1AC</h2>
-
-      <!-- Model Information (Puzzle Hint: refer to external instructions) -->
-      <!--
-      <div class="section">
-        <h3>Model Information</h3>
-        <p><strong>Brand:</strong> Hipower</p>
-        <p><strong>Fuel Type:</strong> Safe Guard Gas</p>
-        <p><strong>Range:</strong> Custom Configuration</p>
-        <p><strong>Power:</strong> 1600 kW</p>
-        <p><strong>Engine Manufacturer:</strong> John Deere</p>
-        <p><strong>Phase:</strong> 3 Phase</p>
-        <p><strong>Frequency:</strong> 60 Hz / 1800 RPM</p>
-        <p><strong>EPA Rating:</strong> D (Tier 4)</p>
-        <p><strong>Alternator Type:</strong> Stamford 6W</p>
-        <p><strong>Voltage:</strong> 277/480V Three Phase</p>
-        <p><strong>Enclosure:</strong> Open</p>
-        <p><strong>Fuel Tank:</strong> ULC208-Santa Clara</p>
-        <p>
-          <strong>Color:</strong> RAL7035
-          <span class="color-preview" style="background-color: #b7c3c9"></span>
-        </p>
-        <p><strong>Control Panel:</strong> CEM-1</p>
-      </div>
-      -->
 
       <!-- Primary Start-Up -->
       <div class="section">
@@ -216,15 +199,15 @@
 
         <!-- Alternator Sync -->
         <div class="form-group">
-          <label
-            ><input type="checkbox" id="syncToggle" /> Alternator Sync</label
+          <label>
+            <input type="checkbox" id="syncToggle" /> Alternator Sync</label
           >
         </div>
 
         <!-- Visual Check -->
         <div class="form-group">
-          <label
-            ><input type="checkbox" id="visualCheck" /> Visual Check (Radiator &
+          <label>
+            <input type="checkbox" id="visualCheck" /> Visual Check (Radiator &
             Fan)</label
           >
         </div>
@@ -242,8 +225,7 @@
               id="engineToggle"
               onchange="updateEngineToggle()"
             />
-            Engine Control Toggle
-            <span id="enginePos"></span>
+            Engine Control Toggle <span id="enginePos"></span>
           </label>
         </div>
 
@@ -263,8 +245,8 @@
 
         <!-- Auxiliary Lighting -->
         <div class="form-group">
-          <label
-            ><input type="checkbox" id="auxLight" /> Auxiliary Lighting</label
+          <label>
+            <input type="checkbox" id="auxLight" /> Auxiliary Lighting</label
           >
         </div>
 
@@ -376,7 +358,7 @@
           altTestPassed = true;
           document.getElementById("altTestStatus").textContent =
             "✓ ALT TEST Completed";
-          altTestBtn.style.backgroundColor = "gray";
+          altTestBtn.style.backgroundColor = "#555";
         }, 3000);
       });
       altTestBtn.addEventListener("mouseup", () => {
@@ -394,7 +376,7 @@
           resetPassed = true;
           document.getElementById("resetStatus").textContent =
             "✓ System Reset Completed";
-          resetBtn.style.backgroundColor = "gray";
+          resetBtn.style.backgroundColor = "#555";
         }, 2000);
       });
       resetBtn.addEventListener("mouseup", () => {
@@ -509,7 +491,7 @@
         const result = document.getElementById("result");
         if (allValid) {
           result.textContent = "✅ Generator Successfully Started!";
-          result.style.color = "green";
+          result.style.color = "limegreen";
         } else {
           result.textContent = "❌ Startup failed. Check all required steps.";
           result.style.color = "red";
