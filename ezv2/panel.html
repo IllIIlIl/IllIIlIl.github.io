@@ -12,6 +12,7 @@
         color: #f0f0f0;
         margin: 0;
         padding: 2rem;
+        user-select: none;
       }
       .panel {
         background-color: #1e1e1e;
@@ -180,13 +181,15 @@
           <label><input type="checkbox" id="breakerC" /> Breaker C</label>
         </div>
 
-        <!-- Voltage Selector -->
+        <!-- Voltage Selector with more options -->
         <div class="form-group">
           <label>Voltage Selector</label>
           <select id="voltage">
             <option value="neutral">Neutral</option>
             <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
             <option value="3">Option 3</option>
+            <option value="4">Option 4</option>
           </select>
         </div>
 
@@ -203,19 +206,19 @@
             <input type="checkbox" id="syncToggle" /> Alternator Sync</label
           >
         </div>
-
-        <!-- Visual Check -->
-        <div class="form-group">
-          <label>
-            <input type="checkbox" id="visualCheck" /> Visual Check (Radiator &
-            Fan)</label
-          >
-        </div>
       </div>
 
       <!-- Secondary System Configuration -->
       <div class="section">
         <h3>Secondary System Configuration</h3>
+
+        <!-- Radiator & Fan Visual Check (moved from Primary) -->
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="visualCheck" /> Visual Check (Radiator &
+            Fan)
+          </label>
+        </div>
 
         <!-- Fuel Tank Configuration -->
         <div class="form-group">
@@ -224,6 +227,7 @@
             <option value="none">Select Tank Type</option>
             <option value="closed">Closed Bottom</option>
             <option value="open">Open Bottom</option>
+            <option value="hybrid">Hybrid</option>
           </select>
         </div>
 
@@ -240,22 +244,23 @@
           >
         </div>
 
-        <!-- Cabinet Color Configuration -->
+        <!-- Cabinet Color Configuration (removed Cabinet Light Check as requested) -->
         <div class="form-group">
           <label>Cabinet Color</label>
           <select id="cabinetColor">
             <option value="none">Select Color</option>
             <option value="RAL7035">RAL7035</option>
             <option value="custom">Custom Color</option>
+            <option value="RAL9003">RAL9003</option>
           </select>
         </div>
 
-        <!-- Cabinet Light Check (only visible for RAL7035) -->
-        <div class="form-group" id="cabinetLightGroup" style="display: none">
-          <label
-            ><input type="checkbox" id="cabinetLight" /> Cabinet Light
-            Functional</label
-          >
+        <!-- Ventilation Dampers -->
+        <div class="form-group">
+          <label>Ventilation Dampers</label>
+          <label><input type="checkbox" id="ventDamper1" /> Damper 1</label>
+          <label><input type="checkbox" id="ventDamper2" /> Damper 2</label>
+          <label><input type="checkbox" id="ventDamper3" /> Damper 3</label>
         </div>
 
         <!-- Engine Control Toggle with Position Indicator -->
@@ -284,13 +289,6 @@
           <span id="altTestStatus"></span>
         </div>
 
-        <!-- Auxiliary Lighting -->
-        <div class="form-group">
-          <label>
-            <input type="checkbox" id="auxLight" /> Auxiliary Lighting</label
-          >
-        </div>
-
         <!-- System Reset (Hold Button for 2 Seconds) -->
         <div class="form-group">
           <label>System Reset (Hold for 2 seconds)</label>
@@ -313,12 +311,14 @@
           </button>
         </div>
 
-        <!-- Control Panel Selection -->
+        <!-- Control Panel Selection with more options -->
         <div class="form-group">
           <label>Control Panel</label>
           <select id="controlPanel">
             <option value="CEM-1">CEM-1</option>
             <option value="DSE7310">DSE7310</option>
+            <option value="XTR-2000">XTR-2000</option>
+            <option value="MX-500">MX-500</option>
           </select>
         </div>
       </div>
@@ -342,11 +342,33 @@
           </label>
         </div>
 
+        <!-- Ignition Button -->
+        <div class="form-group">
+          <label>Ignition</label>
+          <button id="ignitionBtn">Ignition</button>
+        </div>
+
+        <!-- Diagnostics Button -->
+        <div class="form-group">
+          <label>Diagnostics</label>
+          <button id="diagnosticsBtn">Run Diagnostics</button>
+        </div>
+
         <!-- START Button (Hold for 1 second) -->
         <div class="form-group">
           <label>START (Press and hold for at least 1 second)</label>
           <button id="startButton" class="hold-button">Hold START</button>
           <span id="startStatus"></span>
+        </div>
+
+        <!-- Manual Start Menu -->
+        <div class="form-group">
+          <label>Manual Start</label>
+          <select id="manualStart">
+            <option value="auto">Auto</option>
+            <option value="manual1">Manual Option 1</option>
+            <option value="manual2">Manual Option 2</option>
+          </select>
         </div>
       </div>
 
@@ -394,38 +416,38 @@
       // ALT TEST hold button (3 seconds)
       const altTestBtn = document.getElementById("altTestBtn");
       let altTestTimer;
-      altTestBtn.addEventListener("mousedown", () => {
+      function startAltTestTimer() {
         altTestTimer = setTimeout(() => {
           altTestPassed = true;
           document.getElementById("altTestStatus").textContent =
             "✓ ALT TEST Completed";
           altTestBtn.style.backgroundColor = "#555";
         }, 3000);
-      });
-      altTestBtn.addEventListener("mouseup", () => {
-        clearTimeout(altTestTimer);
-      });
-      altTestBtn.addEventListener("mouseleave", () => {
-        clearTimeout(altTestTimer);
-      });
+      }
+      altTestBtn.addEventListener("mousedown", startAltTestTimer);
+      altTestBtn.addEventListener("touchstart", startAltTestTimer);
+      altTestBtn.addEventListener("mouseup", () => clearTimeout(altTestTimer));
+      altTestBtn.addEventListener("mouseleave", () =>
+        clearTimeout(altTestTimer)
+      );
+      altTestBtn.addEventListener("touchend", () => clearTimeout(altTestTimer));
 
       // System Reset hold button (2 seconds)
       const resetBtn = document.getElementById("resetBtn");
       let resetTimer;
-      resetBtn.addEventListener("mousedown", () => {
+      function startResetTimer() {
         resetTimer = setTimeout(() => {
           resetPassed = true;
           document.getElementById("resetStatus").textContent =
             "✓ System Reset Completed";
           resetBtn.style.backgroundColor = "#555";
         }, 2000);
-      });
-      resetBtn.addEventListener("mouseup", () => {
-        clearTimeout(resetTimer);
-      });
-      resetBtn.addEventListener("mouseleave", () => {
-        clearTimeout(resetTimer);
-      });
+      }
+      resetBtn.addEventListener("mousedown", startResetTimer);
+      resetBtn.addEventListener("touchstart", startResetTimer);
+      resetBtn.addEventListener("mouseup", () => clearTimeout(resetTimer));
+      resetBtn.addEventListener("mouseleave", () => clearTimeout(resetTimer));
+      resetBtn.addEventListener("touchend", () => clearTimeout(resetTimer));
 
       // Confirm Top Panel LEDs: set all 5 to green
       function confirmTopLEDs() {
@@ -474,20 +496,17 @@
         // Alternator Sync must be engaged.
         const syncToggle = document.getElementById("syncToggle").checked;
 
-        // Visual Check must be completed.
+        // Radiator & Fan Visual Check must be completed.
         const visualCheck = document.getElementById("visualCheck").checked;
 
         // Engine Control Toggle must be engaged.
         const engineToggle = document.getElementById("engineToggle").checked;
 
         // RPM Dial must be exactly 1.
-        const rpmDialClicks = document.getElementById("rpmDial").value === "1";
+        const rpmDialCorrect = document.getElementById("rpmDial").value === "1";
 
         // ALT TEST must be completed.
         const altTest = altTestPassed;
-
-        // Auxiliary Lighting must be activated.
-        const auxLight = document.getElementById("auxLight").checked;
 
         // System Reset must be completed.
         const resetValid = resetPassed;
@@ -512,12 +531,12 @@
         const masterSelectorAuto =
           document.getElementById("masterSelector").checked;
 
-        // Validate fuel tank configuration
+        // Validate fuel tank configuration (fuel tank type must not be "closed")
         const fuelTankType = document.getElementById("fuelTankType").value;
         const fuelConfigValid = fuelTankType !== "closed";
 
-        // Fail if auxiliary lighting is activated
-        const auxLightCorrect = !document.getElementById("auxLight").checked;
+        // For this validation, Auxiliary Lighting is not used, so we skip it.
+        // Also, manual start selection is ignored in validation.
 
         const allValid = [
           onlyDSwitched,
@@ -526,7 +545,7 @@
           syncToggle,
           visualCheck,
           engineToggle,
-          rpmDialClicks,
+          rpmDialCorrect,
           altTest,
           resetValid,
           ledsGreen,
@@ -534,7 +553,6 @@
           hvLockoutCorrect,
           masterSelectorAuto,
           fuelConfigValid,
-          auxLightCorrect, // Add this new validation
         ].every((v) => v === true);
 
         const result = document.getElementById("result");
@@ -546,6 +564,18 @@
           result.style.color = "red";
         }
       }
+
+      // Example functionality for Ignition and Diagnostics buttons
+      document
+        .getElementById("ignitionBtn")
+        .addEventListener("click", function () {
+          alert("Ignition activated.");
+        });
+      document
+        .getElementById("diagnosticsBtn")
+        .addEventListener("click", function () {
+          alert("Diagnostics running...");
+        });
     </script>
   </body>
 </html>
