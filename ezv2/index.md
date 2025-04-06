@@ -14,6 +14,9 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
+  p {
+    font-family: 'IBM Plex Mono', monospace;
+  }
 
 h1, h2, h3 {
   font-family: 'Roboto', sans-serif;
