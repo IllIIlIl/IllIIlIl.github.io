@@ -112,7 +112,7 @@ This document outlines the correct startup procedure for models using Hipower Sy
 ## 🔄 Secondary System Configuration
 
 9. **If engine is John Deere:**  
-   → Flip `Engine Control Toggle` to **Position B** → Wait for `Amber Light`.
+   → Flip `Engine Control Toggle` to **Position B**
 
 10. **If frequency is 60Hz / 1800 RPM:**  
     → Turn `RPM Dial` **clockwise** one click.
