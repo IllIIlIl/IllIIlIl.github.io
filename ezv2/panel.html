@@ -1,106 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generator Activation Protocol</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 2rem;
-    }
-    h1, h2 {
-      color: #333;
-    }
-    .step {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .step input[type="checkbox"] {
-      transform: scale(1.2);
-      margin-right: 10px;
-    }
-    .step label {
-      font-size: 1rem;
-    }
-    #activateButton, #resetButton {
-      display: block;
-      margin: 2rem auto 0;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    #resetButton {
-      background-color: #dc3545;
-    }
-    #statusMessage {
-      text-align: center;
-      margin-top: 2rem;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-  </style>
-</head>
-<body>
-  <h1>🔧 Generator Activation Protocol</h1>
-  <h2>Interactive Startup Sequence</h2>
-
-  <form id="activationForm">
-    <div class="step"><input type="checkbox" id="step1" /><label for="step1">Press and hold ignition for 4 seconds (if natural gas)</label></div>
-    <div class="step"><input type="checkbox" id="step2" /><label for="step2">Flip Switch D ON (if > 1000 kW)</label></div>
-    <div class="step"><input type="checkbox" id="step3" /><label for="step3">Close Breakers A & C (if dual phase)</label></div>
-    <div class="step"><input type="checkbox" id="step4" /><label for="step4">Set selector to correct voltage position</label></div>
-    <div class="step"><input type="checkbox" id="step5" /><label for="step5">EPA: Diagnostics or LED check</label></div>
-    <div class="step"><input type="checkbox" id="step6" /><label for="step6">Sync alternator (if Stamford 6W)</label></div>
-    <div class="step"><input type="checkbox" id="step7" /><label for="step7">Open dampers or check fan clearance</label></div>
-    <div class="step"><input type="checkbox" id="step8" /><label for="step8">Manual Start > Confirm (if DSE7310)</label></div>
-    <div class="step"><input type="checkbox" id="step9" /><label for="step9">Engine control toggle to B (if John Deere)</label></div>
-    <div class="step"><input type="checkbox" id="step10" /><label for="step10">Adjust RPM dial (based on Hz)</label></div>
-    <div class="step"><input type="checkbox" id="step11" /><label for="step11">Open fuel valve 5s (if base tank)</label></div>
-    <div class="step"><input type="checkbox" id="step12" /><label for="step12">ALT TEST button (if Stamford alternator)</label></div>
-    <div class="step"><input type="checkbox" id="step13" /><label for="step13">Arm fuel interlock (if closed bottom tank)</label></div>
-    <div class="step"><input type="checkbox" id="step14" /><label for="step14">Check cabinet light (if RAL7035)</label></div>
-    <div class="step"><input type="checkbox" id="step15" /><label for="step15">Visual check of radiator and fan (if open)</label></div>
-    <div class="step"><input type="checkbox" id="step16" /><label for="step16">System reset (if 6 appears 2+ times)</label></div>
-    <div class="step"><input type="checkbox" id="step17" /><label for="step17">Engage safety lockout (if > 480V)</label></div>
-    <div class="step"><input type="checkbox" id="step18" /><label for="step18">All LEDs green (if custom config)</label></div>
-
-    <button type="button" id="activateButton">Activate Generator</button>
-    <button type="button" id="resetButton">Start Over</button>
-  </form>
-
-  <div id="statusMessage"></div>
-
-  <script>
-    const activateButton = document.getElementById('activateButton');
-    const resetButton = document.getElementById('resetButton');
-    const statusMessage = document.getElementById('statusMessage');
-
-    activateButton.addEventListener('click', () => {
-      const steps = document.querySelectorAll('input[type="checkbox"]');
-      const allChecked = Array.from(steps).every(step => step.checked);
-
-      if (allChecked) {
-        statusMessage.textContent = '✅ Generator Activated Successfully!';
-        statusMessage.style.color = 'green';
-      } else {
-        statusMessage.textContent = '⚠️ Incomplete sequence. Please verify all steps.';
-        statusMessage.style.color = 'red';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generator Startup Panel</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        background: #f4f4f4;
       }
-    });
+      .panel {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        max-width: 800px;
+        margin: auto;
+      }
+      h2,
+      h3 {
+        margin-top: 0;
+      }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+      input[type="checkbox"],
+      input[type="radio"] {
+        margin-right: 0.5rem;
+      }
+      select,
+      input[type="range"] {
+        padding: 0.5rem;
+        font-size: 1rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+      button {
+        padding: 0.7rem 1.5rem;
+        background-color: green;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      button:disabled {
+        background-color: gray;
+      }
+      .section {
+        border: 1px solid #ddd;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+      }
+      /* EPA LED Animation */
+      @keyframes flash {
+        0%,
+        100% {
+          background-color: #444;
+        }
+        50% {
+          background-color: limegreen;
+        }
+      }
+      .led {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #444;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 1rem;
+      }
+      .flashing {
+        animation: flash 0.5s linear 3;
+      }
+      /* Master Selector Toggle */
+      .toggle {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+      }
+      .toggle input {
+        display: none;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 15px;
+      }
+      .slider:before {
+        position: absolute;
+        content: \"\";
+        height: 26px;
+        width: 26px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: green;
+      }
+      input:checked + .slider:before {
+        transform: translateX(30px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="panel">
+      <h2>Startup Panel – Model HGC1600JS6NE6W1AC</h2>
 
-    resetButton.addEventListener('click', () => {
-      window.location.reload();
-    });
-  </script>
-</body>
+      <!-- Primary Start-Up -->
+      <div class="section">
+        <h3>Primary Start-Up</h3>
+        <!-- Power Switches -->
+        <div class="form-group">
+          <label>Power Switches</label>
+          <label><input type="checkbox" id="switchA" /> Switch A</label>
+          <label><input type="checkbox" id="switchB" /> Switch B</label>
+          <label><input type="checkbox" id="switchC" /> Switch C</label>
+          <label><input type="checkbox" id="switchD" /> Switch D</label>
+        </div>
+
+        <!-- Phase Configuration (Breakers are optional) -->
+        <div class="form-group">
+          <label>Phase Configuration</label>
+          <label><input type="checkbox" id="breakerA" /> Breaker A</label>
+          <label><input type="checkbox" id="breakerC" /> Breaker C</label>
+        </div>
+
+        <!-- Voltage Selector -->
+        <div class="form-group">
+          <label>Voltage Selector</label>
+          <select id="voltage">
+            <option value="neutral">Neutral</option>
+            <option value="1">Option 1</option>
+            <option value="3">Option 3</option>
+          </select>
+        </div>
+
+        <!-- EPA LED (Animated) -->
+        <div class="form-group">
+          <label>EPA LED</label>
+          <button id="activateEPA" onclick="activateEPALED()">Activate</button>
+          <div id="epaLED" class="led"></div>
+        </div>
+
+        <!-- Alternator Sync -->
+        <div class="form-group">
+          <label
+            ><input type="checkbox" id="syncToggle" /> Alternator Sync</label
+          >
+        </div>
+
+        <!-- Visual Check -->
+        <div class="form-group">
+          <label><input type="checkbox" id="visualCheck" /> Visual Check</label>
+        </div>
+      </div>
+
+      <!-- Secondary System Configuration -->
+      <div class="section">
+        <h3>Secondary System Configuration</h3>
+
+        <!-- Engine Control Toggle -->
+        <div class="form-group">
+          <label
+            ><input type="checkbox" id="engineToggle" /> Engine Control
+            Toggle</label
+          >
+        </div>
+
+        <!-- RPM Dial (Drag-to-Toggle) -->
+        <div class="form-group">
+          <label>RPM Dial</label>
+          <input type="range" id="rpmDial" min="0" max="2" step="1" value="0" />
+        </div>
+
+        <!-- ALT TEST -->
+        <div class="form-group">
+          <label><input type="checkbox" id="altTest" /> ALT TEST</label>
+        </div>
+
+        <!-- Auxiliary Lighting -->
+        <div class="form-group">
+          <label
+            ><input type="checkbox" id="auxLight" /> Auxiliary Lighting</label
+          >
+        </div>
+
+        <!-- System Reset -->
+        <div class="form-group">
+          <label><input type="checkbox" id="resetHeld" /> System Reset</label>
+        </div>
+
+        <!-- Top Panel LED Check -->
+        <div class="form-group">
+          <label
+            ><input type="checkbox" id="ledCheck" /> Top Panel LED Check</label
+          >
+        </div>
+
+        <!-- Control Panel Selection -->
+        <div class="form-group">
+          <label>Control Panel</label>
+          <select id="controlPanel">
+            <option value="CEM-1">CEM-1</option>
+            <option value="DSE7310">DSE7310</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Final Activation -->
+      <div class="section">
+        <h3>Final Activation</h3>
+
+        <!-- High Voltage Safety Lockout (Should remain disengaged) -->
+        <div class="form-group">
+          <label>High Voltage Safety Lockout</label>
+          <label><input type="checkbox" id="hvLockout" /> Engage Lockout</label>
+        </div>
+
+        <!-- Master Selector (Toggle: auto = engaged) -->
+        <div class="form-group">
+          <label>Master Selector</label>
+          <label class="toggle">
+            <input type="checkbox" id="masterSelector" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- START Button -->
+        <div class="form-group">
+          <button id="startButton" onclick="validateStartup()">START</button>
+        </div>
+      </div>
+
+      <p id="result" style="font-weight: bold"></p>
+    </div>
+
+    <script>
+      // Variable to track EPA LED status
+      let epaActivated = false;
+      function activateEPALED() {
+        const led = document.getElementById("epaLED");
+        // Prevent reactivation if already activated
+        if (epaActivated) return;
+        // Add flashing animation for 3 flashes (approx. 1.5 sec total)
+        led.classList.add("flashing");
+        // After animation, mark as activated
+        setTimeout(() => {
+          led.classList.remove("flashing");
+          led.style.backgroundColor = "limegreen";
+          epaActivated = true;
+        }, 1500);
+      }
+
+      function validateStartup() {
+        // Check that only Switch D is enabled.
+        const onlyDSwitched =
+          !document.getElementById("switchA").checked &&
+          !document.getElementById("switchB").checked &&
+          !document.getElementById("switchC").checked &&
+          document.getElementById("switchD").checked;
+
+        // Voltage must be Option 3.
+        const voltageCorrect = document.getElementById("voltage").value === "3";
+
+        // EPA LED must have been activated.
+        const epaCorrect = epaActivated;
+
+        // Alternator Sync must be engaged.
+        const syncToggle = document.getElementById("syncToggle").checked;
+
+        // Visual Check must be completed.
+        const visualCheck = document.getElementById("visualCheck").checked;
+
+        // Engine Control Toggle must be engaged.
+        const engineToggle = document.getElementById("engineToggle").checked;
+
+        // RPM Dial must be exactly 1.
+        const rpmDialClicks = document.getElementById("rpmDial").value === "1";
+
+        // ALT TEST must be completed.
+        const altTest = document.getElementById("altTest").checked;
+
+        // Auxiliary Lighting must be activated.
+        const auxLight = document.getElementById("auxLight").checked;
+
+        // System Reset must be completed.
+        const resetHeld = document.getElementById("resetHeld").checked;
+
+        // Top Panel LED Check must be completed.
+        const ledCheck = document.getElementById("ledCheck").checked;
+
+        // Control Panel must be set to CEM-1.
+        const controlPanelCorrect =
+          document.getElementById("controlPanel").value === "CEM-1";
+
+        // High Voltage Safety Lockout must NOT be engaged.
+        const hvLockoutDisabled = !document.getElementById("hvLockout").checked;
+
+        // Master Selector must be set to AUTO.
+        // (We simulate AUTO if the toggle is checked)
+        const masterSelectorAuto =
+          document.getElementById("masterSelector").checked;
+
+        const allValid = [
+          onlyDSwitched,
+          voltageCorrect,
+          epaCorrect,
+          syncToggle,
+          visualCheck,
+          engineToggle,
+          rpmDialClicks,
+          altTest,
+          auxLight,
+          resetHeld,
+          ledCheck,
+          controlPanelCorrect,
+          hvLockoutDisabled,
+          masterSelectorAuto,
+        ].every((v) => v === true);
+
+        const result = document.getElementById("result");
+        if (allValid) {
+          result.textContent = "✅ Generator Successfully Started!";
+          result.style.color = "green";
+        } else {
+          result.textContent = "❌ Startup failed. Check all required steps.";
+          result.style.color = "red";
+        }
+      }
+    </script>
+  </body>
 </html>
