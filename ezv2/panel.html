@@ -217,6 +217,47 @@
       <div class="section">
         <h3>Secondary System Configuration</h3>
 
+        <!-- Fuel Tank Configuration -->
+        <div class="form-group">
+          <label>Fuel Tank Type</label>
+          <select id="fuelTankType">
+            <option value="none">Select Tank Type</option>
+            <option value="closed">Closed Bottom</option>
+            <option value="open">Open Bottom</option>
+          </select>
+        </div>
+
+        <!-- Fuel Safety -->
+        <div class="form-group" id="fuelSafetyGroup">
+          <label>Fuel Safety Steps</label>
+          <label
+            ><input type="checkbox" id="redSafetyCover" /> Lifted Red Safety
+            Cover</label
+          >
+          <label
+            ><input type="checkbox" id="fuelInterlock" /> Armed Fuel
+            Interlock</label
+          >
+        </div>
+
+        <!-- Cabinet Color Configuration -->
+        <div class="form-group">
+          <label>Cabinet Color</label>
+          <select id="cabinetColor">
+            <option value="none">Select Color</option>
+            <option value="RAL7035">RAL7035</option>
+            <option value="custom">Custom Color</option>
+          </select>
+        </div>
+
+        <!-- Cabinet Light Check (only visible for RAL7035) -->
+        <div class="form-group" id="cabinetLightGroup" style="display: none">
+          <label
+            ><input type="checkbox" id="cabinetLight" /> Cabinet Light
+            Functional</label
+          >
+        </div>
+
         <!-- Engine Control Toggle with Position Indicator -->
         <div class="form-group">
           <label>
@@ -471,6 +512,13 @@
         const masterSelectorAuto =
           document.getElementById("masterSelector").checked;
 
+        // Validate fuel tank configuration
+        const fuelTankType = document.getElementById("fuelTankType").value;
+        const fuelConfigValid = fuelTankType !== "closed";
+
+        // Fail if auxiliary lighting is activated
+        const auxLightCorrect = !document.getElementById("auxLight").checked;
+
         const allValid = [
           onlyDSwitched,
           voltageCorrect,
@@ -480,12 +528,13 @@
           engineToggle,
           rpmDialClicks,
           altTest,
-          auxLight,
           resetValid,
           ledsGreen,
           controlPanelCorrect,
           hvLockoutCorrect,
           masterSelectorAuto,
+          fuelConfigValid,
+          auxLightCorrect, // Add this new validation
         ].every((v) => v === true);
 
         const result = document.getElementById("result");
