@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generator Startup Panel</title>
+    <title>Puzzle Generator Startup Panel – Model HGC1600JS6NE6W1AC</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -15,7 +15,7 @@
         padding: 2rem;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-        max-width: 800px;
+        max-width: 900px;
         margin: auto;
       }
       h2,
@@ -103,7 +103,7 @@
       }
       .slider:before {
         position: absolute;
-        content: \"\";
+        content: "";
         height: 26px;
         width: 26px;
         left: 2px;
@@ -118,11 +118,65 @@
       input:checked + .slider:before {
         transform: translateX(30px);
       }
+      /* Top Panel LED Indicators */
+      .top-leds {
+        display: flex;
+        gap: 5px;
+      }
+      .top-led {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #444;
+      }
+      /* Color Preview Box */
+      .color-preview {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #000;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+      }
+      /* Hold Button Style */
+      .hold-button {
+        padding: 0.7rem 1.5rem;
+        background-color: darkorange;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
     </style>
   </head>
   <body>
     <div class="panel">
-      <h2>Startup Panel – Model HGC1600JS6NE6W1AC</h2>
+      <h2>Puzzle Startup Panel – Model HGC1600JS6NE6W1AC</h2>
+
+      <!-- Model Information (Puzzle Hint: refer to external instructions) -->
+      <!--
+      <div class="section">
+        <h3>Model Information</h3>
+        <p><strong>Brand:</strong> Hipower</p>
+        <p><strong>Fuel Type:</strong> Safe Guard Gas</p>
+        <p><strong>Range:</strong> Custom Configuration</p>
+        <p><strong>Power:</strong> 1600 kW</p>
+        <p><strong>Engine Manufacturer:</strong> John Deere</p>
+        <p><strong>Phase:</strong> 3 Phase</p>
+        <p><strong>Frequency:</strong> 60 Hz / 1800 RPM</p>
+        <p><strong>EPA Rating:</strong> D (Tier 4)</p>
+        <p><strong>Alternator Type:</strong> Stamford 6W</p>
+        <p><strong>Voltage:</strong> 277/480V Three Phase</p>
+        <p><strong>Enclosure:</strong> Open</p>
+        <p><strong>Fuel Tank:</strong> ULC208-Santa Clara</p>
+        <p>
+          <strong>Color:</strong> RAL7035
+          <span class="color-preview" style="background-color: #b7c3c9"></span>
+        </p>
+        <p><strong>Control Panel:</strong> CEM-1</p>
+      </div>
+      -->
 
       <!-- Primary Start-Up -->
       <div class="section">
@@ -136,7 +190,7 @@
           <label><input type="checkbox" id="switchD" /> Switch D</label>
         </div>
 
-        <!-- Phase Configuration (Breakers are optional) -->
+        <!-- Phase Configuration -->
         <div class="form-group">
           <label>Phase Configuration</label>
           <label><input type="checkbox" id="breakerA" /> Breaker A</label>
@@ -169,7 +223,10 @@
 
         <!-- Visual Check -->
         <div class="form-group">
-          <label><input type="checkbox" id="visualCheck" /> Visual Check</label>
+          <label
+            ><input type="checkbox" id="visualCheck" /> Visual Check (Radiator &
+            Fan)</label
+          >
         </div>
       </div>
 
@@ -177,23 +234,31 @@
       <div class="section">
         <h3>Secondary System Configuration</h3>
 
-        <!-- Engine Control Toggle -->
+        <!-- Engine Control Toggle with Position Indicator -->
         <div class="form-group">
-          <label
-            ><input type="checkbox" id="engineToggle" /> Engine Control
-            Toggle</label
-          >
+          <label>
+            <input
+              type="checkbox"
+              id="engineToggle"
+              onchange="updateEngineToggle()"
+            />
+            Engine Control Toggle
+            <span id="enginePos"></span>
+          </label>
         </div>
 
         <!-- RPM Dial (Drag-to-Toggle) -->
         <div class="form-group">
-          <label>RPM Dial</label>
+          <label>RPM Dial (Turn one click clockwise)</label>
           <input type="range" id="rpmDial" min="0" max="2" step="1" value="0" />
+          <span id="rpmDisplay">0</span>
         </div>
 
-        <!-- ALT TEST -->
+        <!-- ALT TEST (Hold Button for 3 Seconds) -->
         <div class="form-group">
-          <label><input type="checkbox" id="altTest" /> ALT TEST</label>
+          <label>ALT TEST (Press and hold for 3 seconds)</label>
+          <button id="altTestBtn" class="hold-button">Hold ALT TEST</button>
+          <span id="altTestStatus"></span>
         </div>
 
         <!-- Auxiliary Lighting -->
@@ -203,16 +268,26 @@
           >
         </div>
 
-        <!-- System Reset -->
+        <!-- System Reset (Hold Button for 2 Seconds) -->
         <div class="form-group">
-          <label><input type="checkbox" id="resetHeld" /> System Reset</label>
+          <label>System Reset (Hold for 2 seconds)</label>
+          <button id="resetBtn" class="hold-button">Hold Reset</button>
+          <span id="resetStatus"></span>
         </div>
 
         <!-- Top Panel LED Check -->
         <div class="form-group">
-          <label
-            ><input type="checkbox" id="ledCheck" /> Top Panel LED Check</label
-          >
+          <label>Top Panel LED Check (All 5 must be green)</label>
+          <div class="top-leds" id="topLeds">
+            <div class="top-led" id="led1"></div>
+            <div class="top-led" id="led2"></div>
+            <div class="top-led" id="led3"></div>
+            <div class="top-led" id="led4"></div>
+            <div class="top-led" id="led5"></div>
+          </div>
+          <button id="confirmLEDs" onclick="confirmTopLEDs()">
+            Confirm LEDs
+          </button>
         </div>
 
         <!-- Control Panel Selection -->
@@ -229,7 +304,7 @@
       <div class="section">
         <h3>Final Activation</h3>
 
-        <!-- High Voltage Safety Lockout (Should remain disengaged) -->
+        <!-- High Voltage Safety Lockout -->
         <div class="form-group">
           <label>High Voltage Safety Lockout</label>
           <label><input type="checkbox" id="hvLockout" /> Engage Lockout</label>
@@ -244,25 +319,48 @@
           </label>
         </div>
 
-        <!-- START Button -->
+        <!-- START Button (Hold for 1 second) -->
         <div class="form-group">
-          <button id="startButton" onclick="validateStartup()">START</button>
+          <label>START (Press and hold for at least 1 second)</label>
+          <button id="startButton" class="hold-button">Hold START</button>
+          <span id="startStatus"></span>
         </div>
+      </div>
+
+      <!-- Print-Friendly Report -->
+      <div class="form-group">
+        <button onclick="window.print()">Print Report</button>
       </div>
 
       <p id="result" style="font-weight: bold"></p>
     </div>
 
     <script>
-      // Variable to track EPA LED status
+      // Global flags for timed hold buttons
       let epaActivated = false;
+      let altTestPassed = false;
+      let resetPassed = false;
+      let startPassed = false;
+
+      // Update RPM display value
+      const rpmDial = document.getElementById("rpmDial");
+      const rpmDisplay = document.getElementById("rpmDisplay");
+      rpmDial.addEventListener("input", function () {
+        rpmDisplay.textContent = rpmDial.value;
+      });
+
+      // Engine Toggle update: display Position B when checked
+      function updateEngineToggle() {
+        const engineToggle = document.getElementById("engineToggle");
+        const enginePos = document.getElementById("enginePos");
+        enginePos.textContent = engineToggle.checked ? " (Position B)" : "";
+      }
+
+      // Activate EPA LED animation (3 flashes)
       function activateEPALED() {
         const led = document.getElementById("epaLED");
-        // Prevent reactivation if already activated
         if (epaActivated) return;
-        // Add flashing animation for 3 flashes (approx. 1.5 sec total)
         led.classList.add("flashing");
-        // After animation, mark as activated
         setTimeout(() => {
           led.classList.remove("flashing");
           led.style.backgroundColor = "limegreen";
@@ -270,6 +368,72 @@
         }, 1500);
       }
 
+      // ALT TEST hold button (3 seconds)
+      const altTestBtn = document.getElementById("altTestBtn");
+      let altTestTimer;
+      altTestBtn.addEventListener("mousedown", () => {
+        altTestTimer = setTimeout(() => {
+          altTestPassed = true;
+          document.getElementById("altTestStatus").textContent =
+            "✓ ALT TEST Completed";
+          altTestBtn.style.backgroundColor = "gray";
+        }, 3000);
+      });
+      altTestBtn.addEventListener("mouseup", () => {
+        clearTimeout(altTestTimer);
+      });
+      altTestBtn.addEventListener("mouseleave", () => {
+        clearTimeout(altTestTimer);
+      });
+
+      // System Reset hold button (2 seconds)
+      const resetBtn = document.getElementById("resetBtn");
+      let resetTimer;
+      resetBtn.addEventListener("mousedown", () => {
+        resetTimer = setTimeout(() => {
+          resetPassed = true;
+          document.getElementById("resetStatus").textContent =
+            "✓ System Reset Completed";
+          resetBtn.style.backgroundColor = "gray";
+        }, 2000);
+      });
+      resetBtn.addEventListener("mouseup", () => {
+        clearTimeout(resetTimer);
+      });
+      resetBtn.addEventListener("mouseleave", () => {
+        clearTimeout(resetTimer);
+      });
+
+      // Confirm Top Panel LEDs: set all 5 to green
+      function confirmTopLEDs() {
+        for (let i = 1; i <= 5; i++) {
+          document.getElementById("led" + i).style.backgroundColor =
+            "limegreen";
+        }
+      }
+
+      // START button hold (1 second)
+      const startButton = document.getElementById("startButton");
+      let startTimer;
+      startButton.addEventListener("mousedown", () => {
+        startTimer = setTimeout(() => {
+          startPassed = true;
+          document.getElementById("startStatus").textContent =
+            "✓ START Hold Completed";
+        }, 1000);
+      });
+      startButton.addEventListener("mouseup", () => {
+        clearTimeout(startTimer);
+        // Validate startup only if hold was completed
+        if (startPassed) {
+          validateStartup();
+        }
+      });
+      startButton.addEventListener("mouseleave", () => {
+        clearTimeout(startTimer);
+      });
+
+      // Validate the startup process
       function validateStartup() {
         // Check that only Switch D is enabled.
         const onlyDSwitched =
@@ -297,26 +461,31 @@
         const rpmDialClicks = document.getElementById("rpmDial").value === "1";
 
         // ALT TEST must be completed.
-        const altTest = document.getElementById("altTest").checked;
+        const altTest = altTestPassed;
 
         // Auxiliary Lighting must be activated.
         const auxLight = document.getElementById("auxLight").checked;
 
         // System Reset must be completed.
-        const resetHeld = document.getElementById("resetHeld").checked;
+        const resetValid = resetPassed;
 
-        // Top Panel LED Check must be completed.
-        const ledCheck = document.getElementById("ledCheck").checked;
+        // Top Panel LED Check: verify that all 5 LEDs are green.
+        const topLEDs = document.querySelectorAll(".top-led");
+        let ledsGreen = true;
+        topLEDs.forEach((led) => {
+          if (led.style.backgroundColor !== "limegreen") {
+            ledsGreen = false;
+          }
+        });
 
         // Control Panel must be set to CEM-1.
         const controlPanelCorrect =
           document.getElementById("controlPanel").value === "CEM-1";
 
         // High Voltage Safety Lockout must NOT be engaged.
-        const hvLockoutDisabled = !document.getElementById("hvLockout").checked;
+        const hvLockoutCorrect = !document.getElementById("hvLockout").checked;
 
         // Master Selector must be set to AUTO.
-        // (We simulate AUTO if the toggle is checked)
         const masterSelectorAuto =
           document.getElementById("masterSelector").checked;
 
@@ -330,10 +499,10 @@
           rpmDialClicks,
           altTest,
           auxLight,
-          resetHeld,
-          ledCheck,
+          resetValid,
+          ledsGreen,
           controlPanelCorrect,
-          hvLockoutDisabled,
+          hvLockoutCorrect,
           masterSelectorAuto,
         ].every((v) => v === true);
 
