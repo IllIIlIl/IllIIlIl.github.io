@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generator Activation Protocol</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .step {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .step input[type="checkbox"] {
+      transform: scale(1.2);
+      margin-right: 10px;
+    }
+    .step label {
+      font-size: 1rem;
+    }
+    #activateButton, #resetButton {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #resetButton {
+      background-color: #dc3545;
+    }
+    #statusMessage {
+      text-align: center;
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔧 Generator Activation Protocol</h1>
+  <h2>Interactive Startup Sequence</h2>
+
+  <form id="activationForm">
+    <div class="step"><input type="checkbox" id="step1" /><label for="step1">Press and hold ignition for 4 seconds (if natural gas)</label></div>
+    <div class="step"><input type="checkbox" id="step2" /><label for="step2">Flip Switch D ON (if > 1000 kW)</label></div>
+    <div class="step"><input type="checkbox" id="step3" /><label for="step3">Close Breakers A & C (if dual phase)</label></div>
+    <div class="step"><input type="checkbox" id="step4" /><label for="step4">Set selector to correct voltage position</label></div>
+    <div class="step"><input type="checkbox" id="step5" /><label for="step5">EPA: Diagnostics or LED check</label></div>
+    <div class="step"><input type="checkbox" id="step6" /><label for="step6">Sync alternator (if Stamford 6W)</label></div>
+    <div class="step"><input type="checkbox" id="step7" /><label for="step7">Open dampers or check fan clearance</label></div>
+    <div class="step"><input type="checkbox" id="step8" /><label for="step8">Manual Start > Confirm (if DSE7310)</label></div>
+    <div class="step"><input type="checkbox" id="step9" /><label for="step9">Engine control toggle to B (if John Deere)</label></div>
+    <div class="step"><input type="checkbox" id="step10" /><label for="step10">Adjust RPM dial (based on Hz)</label></div>
+    <div class="step"><input type="checkbox" id="step11" /><label for="step11">Open fuel valve 5s (if base tank)</label></div>
+    <div class="step"><input type="checkbox" id="step12" /><label for="step12">ALT TEST button (if Stamford alternator)</label></div>
+    <div class="step"><input type="checkbox" id="step13" /><label for="step13">Arm fuel interlock (if closed bottom tank)</label></div>
+    <div class="step"><input type="checkbox" id="step14" /><label for="step14">Check cabinet light (if RAL7035)</label></div>
+    <div class="step"><input type="checkbox" id="step15" /><label for="step15">Visual check of radiator and fan (if open)</label></div>
+    <div class="step"><input type="checkbox" id="step16" /><label for="step16">System reset (if 6 appears 2+ times)</label></div>
+    <div class="step"><input type="checkbox" id="step17" /><label for="step17">Engage safety lockout (if > 480V)</label></div>
+    <div class="step"><input type="checkbox" id="step18" /><label for="step18">All LEDs green (if custom config)</label></div>
+
+    <button type="button" id="activateButton">Activate Generator</button>
+    <button type="button" id="resetButton">Start Over</button>
+  </form>
+
+  <div id="statusMessage"></div>
+
+  <script>
+    const activateButton = document.getElementById('activateButton');
+    const resetButton = document.getElementById('resetButton');
+    const statusMessage = document.getElementById('statusMessage');
+
+    activateButton.addEventListener('click', () => {
+      const steps = document.querySelectorAll('input[type="checkbox"]');
+      const allChecked = Array.from(steps).every(step => step.checked);
+
+      if (allChecked) {
+        statusMessage.textContent = '✅ Generator Activated Successfully!';
+        statusMessage.style.color = 'green';
+      } else {
+        statusMessage.textContent = '⚠️ Incomplete sequence. Please verify all steps.';
+        statusMessage.style.color = 'red';
+      }
+    });
+
+    resetButton.addEventListener('click', () => {
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>
