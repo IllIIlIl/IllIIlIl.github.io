@@ -1,4 +1,4 @@
-# **HGC1600JS6NE6W1AC – High-Power Industrial Generator Specifications & Features**
+# **HGC1600JS6NE6W1AC and other HG models – High-Power Industrial Generator Operation Instructions**
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Roboto:wght@400;700&display=swap');
 
@@ -66,12 +66,11 @@ blockquote {
 }
 </style>
 
-# 🔧 Generator Activation Protocol
+# Hipower Systems Generator Activation
 **Document ID:** HGC-OPS-ACT1600  
 **Revision:** 2.1  
-**Confidential – Authorized Personnel Only**
 
-This document outlines the correct startup procedure for models using Hipower Systems Generator Configuration Codes. Use the model number and provided reference chart to determine which actions to perform.
+This document outlines the correct startup procedure for any model of Hipower Systems Generator. Use the model number and provided reference chart to determine which actions to perform.
 
 ⚠️ **Incorrect steps may result in failure to initialize or lockout status. Follow conditions precisely.**
 
