@@ -15,9 +15,6 @@ This document outlines the correct startup procedure for any model of Hipower Sy
 
 ## ✅ Primary Start-Up Instructions
 
-1. **If the generator uses natural gas:**  
-   → Press and hold the `Green Ignition` button for **4 seconds**.
-
 2. **If the unit is rated above 1000 kW:**  
    → Flip `Switch D` to the `ON` position before startup.
 
@@ -30,8 +27,8 @@ This document outlines the correct startup procedure for any model of Hipower Sy
    - Otherwise → Leave selector in `Neutral`
 
 5. **EPA Rating:**  
-   - `Non-EPA` or `Tier 2` → Tap `Diagnostic` button **once**  
-   - `Tier 3` or `Tier 4` → Wait for `Green LED` to flash **three times**
+   - `Non-EPA` or `Tier 2` → Tap `Diagnostic` button once  
+   - `Tier 3` or `Tier 4` → Press activate and wait for `Green LED` to flash **four times**
 
 6. **If alternator is Stamford 6W:**  
    → Toggle `Alternator Sync` switch to `ON`.
@@ -75,6 +72,9 @@ This document outlines the correct startup procedure for any model of Hipower Sy
 
 18. **If range is custom configuration:**  
     → Confirm **all five** `Top Panel LEDs` are `Green`.
+    
+19. **If the generator uses natural gas:**  
+   → Press and hold the `Green Ignition` button for **4 seconds**.
 
 ---
 
