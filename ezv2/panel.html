@@ -263,9 +263,11 @@
 
         <!-- Ventilation Dampers -->
         <div class="form-group">
-          <label>Ventilation Dampers</label>
+          <label>Ventilation Dampers (checked is open)</label>
           <label><input type="checkbox" id="ventDamper1" /> Damper 1</label>
-          <label><input type="checkbox" id="ventDamper2" /> Damper 2</label>
+          <label
+            ><input type="checkbox" id="ventDamper2" checked /> Damper 2</label
+          >
           <label><input type="checkbox" id="ventDamper3" /> Damper 3</label>
         </div>
 
@@ -546,6 +548,12 @@
         const fuelTankType = document.getElementById("fuelTankType").value;
         const fuelConfigValid = fuelTankType !== "closed";
 
+        // Validate that all dampers are open.
+        const allDampersOpen =
+          document.getElementById("ventDamper1").checked &&
+          document.getElementById("ventDamper2").checked &&
+          document.getElementById("ventDamper3").checked;
+
         // For this validation, Auxiliary Lighting is not used, so we skip it.
         // Also, manual start selection is ignored in validation.
 
@@ -564,6 +572,7 @@
           hvLockoutCorrect,
           masterSelectorAuto,
           fuelConfigValid,
+          allDampersOpen, // Add the new validation check
         ].every((v) => v === true);
 
         const result = document.getElementById("result");
@@ -591,4 +600,3 @@
     </script>
   </body>
 </html>
- 
