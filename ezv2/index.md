@@ -53,8 +53,7 @@ Certainly! Here's the revised version with corrected numbering and all emojis re
 8. **If engine is John Deere:**
    → Flip `Engine Control Toggle` to **Position B**
 
-9. **If frequency is 60Hz / 1800 RPM:**
-   → Turn `RPM Dial` **clockwise** one click.
+9. **Turn RPM Dial to the Specified RPM**
 
 10. **If fuel tank is standard base frame:**
     → Open `Fuel Flow Valve` for **5 seconds**, then close.
