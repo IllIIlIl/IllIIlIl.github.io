@@ -401,6 +401,20 @@
       let resetPassed = false;
       let startPassed = false;
 
+      // Initialize LED randomization on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        const leds = Array.from({ length: 5 }, (_, i) => ({
+          element: document.getElementById(`led${i + 1}`),
+          delay: Math.random() * 60000, // Random delay between 0-60000ms (60s)
+        }));
+
+        leds.forEach((led) => {
+          setTimeout(() => {
+            led.element.style.backgroundColor = "limegreen";
+          }, led.delay);
+        });
+      });
+
       // Update RPM display value
       const rpmDial = document.getElementById("rpmDial");
       const rpmDisplay = document.getElementById("rpmDisplay");
@@ -466,9 +480,15 @@
 
       // Confirm Top Panel LEDs: set all 5 to green
       function confirmTopLEDs() {
-        for (let i = 1; i <= 5; i++) {
-          document.getElementById("led" + i).style.backgroundColor =
-            "limegreen";
+        const topLEDs = document.querySelectorAll(".top-led");
+        const allGreen = Array.from(topLEDs).every(
+          (led) => led.style.backgroundColor === "limegreen"
+        );
+
+        if (allGreen) {
+          alert("Confirmed - all LEDs are green!");
+        } else {
+          alert("Not all LEDs are green yet. Please wait.");
         }
       }
 
