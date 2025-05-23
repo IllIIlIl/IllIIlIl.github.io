@@ -172,28 +172,28 @@
         <!-- Power Switches -->
         <div class="form-group">
           <label>Power Switches</label>
-          <!--Should be only D-->
-          <label><input type="checkbox" id="switchA" /> Switch A</label>
-          <label><input type="checkbox" id="switchB" /> Switch B</label>
-          <label><input type="checkbox" id="switchC" /> Switch C</label>
-          <label><input type="checkbox" id="switchD" /> Switch D</label>
+          <input type="checkbox" id="switchA" data-shouldbe="false" /> Switch A
+          <input type="checkbox" id="switchB" data-shouldbe="false" /> Switch B
+          <input type="checkbox" id="switchC" data-shouldbe="false" /> Switch C
+          <input type="checkbox" id="switchD" data-shouldbe="true" /> Switch D
         </div>
 
         <!-- Phase Configuration -->
         <div class="form-group">
           <label>Phase Configuration</label>
-          <!--Should be only A and C-->
-          <label><input type="checkbox" id="breakerA" /> Breaker A</label>
-          <label><input type="checkbox" id="breakerB" /> Breaker B</label>
-          <label><input type="checkbox" id="breakerC" /> Breaker C</label>
-          <label><input type="checkbox" id="breakerD" /> Breaker D</label>
+          <input type="checkbox" id="breakerA" data-shouldbe="true" /> Breaker A
+          <input type="checkbox" id="breakerB" data-shouldbe="false" /> Breaker
+          B <input type="checkbox" id="breakerC" data-shouldbe="true" /> Breaker
+          C
+          <input type="checkbox" id="breakerD" data-shouldbe="false" /> Breaker
+          D
         </div>
 
-        <!-- Voltage Selector with more options -->
+        <!-- Voltage Selector -->
         <div class="form-group">
           <label>Voltage Selector</label>
-          <select id="voltage">
-            <!--Should be pos 3-->
+          <select id="voltage" data-shouldbe="3">
+            <!--TODO: Should be neutral, requires validatioan!-->
             <option value="neutral">Neutral</option>
             <option value="1">Position 1</option>
             <option value="2">Position 2</option>
@@ -202,18 +202,28 @@
           </select>
         </div>
 
-        <!-- EPA LED (Animated) -->
+        <!-- EPA LED -->
         <div class="form-group">
           <label>EPA LED</label>
+          <!--TODO: this should never be pressed, invalidate if so-->
           <button id="activateEPA" onclick="activateEPALED()">Activate</button>
-          <div id="epaLED" class="led"></div>
+          <div id="epaLED" class="led" data-shouldbe="true"></div>
+        </div>
+
+        <!-- Diagnostics -->
+        <div class="form-group">
+          <label>Diagnostics</label>
+          <!--TODO: this should be clicked, invalidate if not-->
+          <button id="diagnosticsBtn">Run Diagnostics</button>
+          <span id="diagnosticsStatus"></span>
         </div>
 
         <!-- Alternator Sync -->
         <div class="form-group">
           <label>
-            <input type="checkbox" id="syncToggle" /> Alternator Sync</label
-          >
+            <input type="checkbox" id="syncToggle" data-shouldbe="false" />
+            Alternator Sync
+          </label>
         </div>
       </div>
 
@@ -221,67 +231,44 @@
       <div class="section">
         <h3>Secondary System Configuration</h3>
 
-        <!-- Radiator & Fan Visual Check (moved from Primary) -->
+        <!-- Radiator & Fan Visual Check -->
         <div class="form-group">
           <label>
-            <input type="checkbox" id="visualCheck" /> Visual Check (Radiator &
-            Fan)
+            <input type="checkbox" id="visualCheck" data-shouldbe="false" />
+            Visual Check (Radiator & Fan)
           </label>
-        </div>
-
-        <!-- Fuel Tank Configuration -->
-        <div class="form-group">
-          <label>Fuel Tank Type</label>
-          <select id="fuelTankType">
-            <option value="none">Select Tank Type</option>
-            <option value="closed">Closed Bottom</option>
-            <option value="open">Open Bottom</option>
-            <option value="hybrid">Hybrid</option>
-          </select>
         </div>
 
         <!-- Fuel Safety -->
         <div class="form-group" id="fuelSafetyGroup">
           <label>Fuel Initialization</label>
-          <!--Should be true-->
-          <label
-            ><input type="checkbox" id="fuelInterlock" /> Armed Fuel
-            Interlock</label
-          >
-          <!--Should be false-->
-          <label
-            ><input type="checkbox" id="secondaryIntake" /> Sealed Secondary
-            Intake</label
-          >
+          <input type="checkbox" id="fuelInterlock" data-shouldbe="false" />
+          Armed Fuel Interlock
+          <input type="checkbox" id="secondaryIntake" data-shouldbe="false" />
+          Sealed Secondary Intake
+          <input type="checkbox" id="secondaryIntake" data-shouldbe="false" />
+          Fuel Flow Valve
         </div>
-
-        <!-- Cabinet Color Configuration (removed Cabinet Light Check as requested) -->
-        <!-- <div class="form-group">
-          <label>Cabinet Color</label>
-          <select id="cabinetColor">
-            <option value="none">Select Color</option>
-            <option value="RAL7035">RAL7035</option>
-            <option value="custom">Custom Color</option>
-            <option value="RAL9003">RAL9003</option>
-          </select>
-        </div> -->
 
         <!-- Ventilation Dampers -->
         <div class="form-group">
           <label>Ventilation Dampers (checked is open)</label>
-          <!-- all should be 3-->
-          <label><input type="checkbox" id="ventDamper1" /> Damper 1</label>
-          <label
-            ><input type="checkbox" id="ventDamper2" checked /> Damper 2</label
-          >
-          <label><input type="checkbox" id="ventDamper3" /> Damper 3</label>
+          <input type="checkbox" id="ventDamper1" data-shouldbe="true" /> Damper
+          1
+          <input type="checkbox" id="ventDamper2" data-shouldbe="true" /> Damper
+          2
+          <input type="checkbox" id="ventDamper3" data-shouldbe="true" /> Damper
+          3
         </div>
 
         <!-- Engine Control Toggle with Position Indicator -->
         <div class="form-group">
           <label>Engine Control Position</label>
-          <!-- Should be B-->
-          <select id="engineToggle" onchange="updateEngineToggle()">
+          <select
+            id="engineToggle"
+            data-shouldbe="B"
+            onchange="updateEngineToggle()"
+          >
             <option value="A">Position A</option>
             <option value="B">Position B</option>
             <option value="C">Position C</option>
@@ -289,13 +276,13 @@
           <span id="enginePos"></span>
         </div>
 
-        <!-- RPM Dial (Drag-to-Toggle) -->
-        <!-- Should be 1800-->
+        <!-- RPM Dial -->
         <div class="form-group">
           <label>RPM Dial</label>
           <input
             type="range"
             id="rpmDial"
+            data-shouldbe="1800"
             min="0"
             max="3000"
             step="100"
@@ -304,17 +291,31 @@
           <span id="rpmDisplay">0</span>
         </div>
 
-        <!-- ALT TEST (Hold Button for 3 Seconds) -->
+        <!-- ALT TEST -->
         <div class="form-group">
           <label>ALT TEST (Press and hold for 3 seconds)</label>
-          <button id="altTestBtn" class="hold-button">Hold ALT TEST</button>
+          <button
+            id="altTestBtn"
+            class="hold-button"
+            data-shouldbe="true"
+            data-holdtime="3000"
+          >
+            Hold ALT TEST
+          </button>
           <span id="altTestStatus"></span>
         </div>
 
-        <!-- System Reset (Hold Button for 2 Seconds) -->
+        <!-- System Reset -->
         <div class="form-group">
           <label>System Reset (Hold for 2 seconds)</label>
-          <button id="resetBtn" class="hold-button">Hold Reset</button>
+          <button
+            id="resetBtn"
+            class="hold-button"
+            data-shouldbe="true"
+            data-holdtime="2000"
+          >
+            Hold Reset
+          </button>
           <span id="resetStatus"></span>
         </div>
 
@@ -333,14 +334,14 @@
           </button>
         </div>
 
-        <!-- Control Panel Selection with more options -->
+        <!-- Control Panel -->
         <div class="form-group">
           <label>Control Panel</label>
-          <select id="controlPanel">
-            <option value="CEM-1">CEM-1</option>
+          <select id="controlPanel" data-shouldbe="CEM7">
+            <option value="CEM7">CEM7</option>
             <option value="DSE7310">DSE7310</option>
-            <option value="XTR-2000">XTR-2000</option>
-            <option value="MX-500">MX-500</option>
+            <option value="ILAMF25">ILAMF25</option>
+            <option value="MRS16">MRS16</option>
           </select>
         </div>
       </div>
@@ -352,51 +353,49 @@
         <!-- High Voltage Safety Lockout -->
         <div class="form-group">
           <label>High Voltage Safety</label>
-          <label><input type="checkbox" id="hvLockout" /> Engage </label>
+          <input type="checkbox" id="hvLockout" data-shouldbe="true" /> Engage
         </div>
 
-        <!-- Master Selector (Dropdown: auto = engaged) -->
+        <!-- Master Selector -->
         <div class="form-group">
           <label>Master Selector</label>
-          <select id="masterSelector">
+          <select id="masterSelector" data-shouldbe="auto">
             <option value="manual">Manual</option>
             <option value="auto">Auto</option>
           </select>
-        </div>
-
-        <!-- Ignition Button -->
-        <div class="form-group">
-          <label>Ignition</label>
-          <button id="ignitionBtn">Ignition</button>
-        </div>
-
-        <!-- Diagnostics Button -->
-        <div class="form-group">
-          <label>Diagnostics</label>
-          <button id="diagnosticsBtn">Run Diagnostics</button>
-        </div>
-
-        <!-- START Button (Hold for 1 second) -->
-        <div class="form-group">
-          <label>START (Press and hold for at least 1 second)</label>
-          <button id="startButton" class="hold-button">Hold START</button>
-          <span id="startStatus"></span>
         </div>
 
         <!-- Manual Start Menu -->
         <div class="form-group">
           <label>Manual Start</label>
           <select id="manualStart">
+            <!--TODO: Should be auto!-->
             <option value="auto">Auto</option>
             <option value="manual1">Manual Option 1</option>
             <option value="manual2">Manual Option 2</option>
           </select>
         </div>
-      </div>
 
-      <!-- Print-Friendly Report -->
-      <div class="form-group">
-        <button onclick="window.print()">Print Report</button>
+        <!-- Ignition Button -->
+        <div class="form-group">
+          <label>Ignition</label>
+          <!--TODO: should be pressed-->
+          <button id="ignitionBtn">Ignition</button>
+        </div>
+
+        <!-- START Button -->
+        <div class="form-group">
+          <label>START (Press and hold for at least 1 second)</label>
+          <button
+            id="startButton"
+            class="hold-button"
+            data-shouldbe="true"
+            data-holdtime="1000"
+          >
+            Hold START
+          </button>
+          <span id="startStatus"></span>
+        </div>
       </div>
 
       <p id="result" style="font-weight: bold"></p>
@@ -413,7 +412,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         const leds = Array.from({ length: 5 }, (_, i) => ({
           element: document.getElementById(`led${i + 1}`),
-          delay: Math.random() * 60000, // Random delay between 0-60000ms (60s)
+          delay: Math.random() * 120_000, // Random delay between 0 and 120 seconds
         }));
 
         leds.forEach((led) => {
@@ -434,8 +433,6 @@
       function updateEngineToggle() {
         const engineToggle = document.getElementById("engineToggle");
         const enginePos = document.getElementById("enginePos");
-        enginePos.textContent =
-          engineToggle.value === "B" ? " (Position B)" : "";
       }
 
       // Activate EPA LED animation (3 flashes)
@@ -523,103 +520,141 @@
 
       // Validate the startup process
       function validateStartup() {
-        // Check that only Switch D is enabled.
-        const onlyDSwitched =
-          !document.getElementById("switchA").checked &&
-          !document.getElementById("switchB").checked &&
-          !document.getElementById("switchC").checked &&
-          document.getElementById("switchD").checked &&
-          document.getElementById("breakerA").checked && // breakers
-          !document.getElementById("breakerB").checked &&
-          document.getElementById("breakerC").checked &&
-          !document.getElementById("breakerD").checked;
+        console.group("Startup Validation");
+        const validationResults = [];
 
-        // Voltage must be Option 3.
-        const voltageCorrect = document.getElementById("voltage").value === "3";
+        // Check voltage selector must start in neutral
+        const voltage = document.getElementById("voltage");
+        if (voltage.value !== "neutral") {
+          validationResults.push("Voltage must start in neutral position");
+        }
 
-        // EPA LED must have been activated.
-        const epaCorrect = epaActivated;
+        // Check EPA button should never be pressed
+        if (epaActivated) {
+          validationResults.push("EPA button should not be activated");
+        }
 
-        // Alternator Sync must be engaged.
-        const syncToggle = document.getElementById("syncToggle").checked;
+        // Check diagnostics must be run
+        const diagnosticsBtn = document.getElementById("diagnosticsBtn");
+        if (!diagnosticsBtn.disabled) {
+          validationResults.push("Diagnostics must be run");
+        }
 
-        // Radiator & Fan Visual Check must be completed.
-        const visualCheck = document.getElementById("visualCheck").checked;
+        // Check ignition button must be pressed
+        const ignitionBtn = document.getElementById("ignitionBtn");
+        if (!ignitionBtn.disabled) {
+          validationResults.push("Ignition must be activated");
+        }
 
-        // Engine Control Toggle must be engaged.
-        const engineToggle =
-          document.getElementById("engineToggle").value === "B";
+        // Check manual start should be auto
+        const manualStart = document.getElementById("manualStart");
+        if (manualStart.value !== "auto") {
+          validationResults.push("Manual Start must be in Auto position");
+        }
 
-        // RPM Dial must be exactly 1800.
-        const rpmDialCorrect =
-          document.getElementById("rpmDial").value === "1800";
+        // Check all data-shouldbe attributes
+        const controls = document.querySelectorAll("[data-shouldbe]");
+        controls.forEach((control) => {
+          const shouldBe = control.dataset.shouldbe;
+          let isValid = false;
 
-        // ALT TEST must be completed.
-        const altTest = altTestPassed;
+          switch (control.type) {
+            case "checkbox":
+              isValid = control.checked === (shouldBe === "true");
+              if (!isValid) {
+                console.log(
+                  `${control.id} should be ${shouldBe}, but is ${control.checked}`
+                );
+              }
+              break;
+            case "select-one":
+              isValid = control.value === shouldBe;
+              if (!isValid) {
+                console.log(
+                  `${control.id} should be ${shouldBe}, but is ${control.value}`
+                );
+              }
+              break;
+            case "range":
+              isValid = control.value === shouldBe;
+              if (!isValid) {
+                console.log(
+                  `${control.id} should be ${shouldBe}, but is ${control.value}`
+                );
+              }
+              break;
+            default:
+              if (control.classList.contains("led")) {
+                isValid =
+                  (control.style.backgroundColor === "limegreen") ===
+                  (shouldBe === "true");
+                if (!isValid) {
+                  console.log(
+                    `${control.id} LED should be ${shouldBe}, but isn't green`
+                  );
+                }
+              } else if (control.classList.contains("hold-button")) {
+                const holdComplete = control.dataset.holdcomplete === "true";
+                isValid = holdComplete === (shouldBe === "true");
+                if (!isValid) {
+                  console.log(`${control.id} button hold not completed`);
+                }
+              }
+          }
 
-        // System Reset must be completed.
-        const resetValid = resetPassed;
-
-        // Top Panel LED Check: verify that all 5 LEDs are green.
-        const topLEDs = document.querySelectorAll(".top-led");
-        let ledsGreen = true;
-        topLEDs.forEach((led) => {
-          if (led.style.backgroundColor !== "limegreen") {
-            ledsGreen = false;
+          if (!isValid) {
+            validationResults.push(`${control.id} validation failed`);
           }
         });
 
-        // Control Panel must be set to CEM-1.
-        const controlPanelCorrect =
-          document.getElementById("controlPanel").value === "CEM-1";
-
-        // High Voltage Safety Lockout must be engaged.
-        const hvLockoutCorrect = document.getElementById("hvLockout").checked;
-
-        // Master Selector must be set to AUTO.
-        const masterSelectorAuto =
-          document.getElementById("masterSelector").value === "auto";
-
-        // Validate fuel tank configuration (fuel tank type must not be "closed")
-        const fuelTankType = document.getElementById("fuelTankType").value;
-        const fuelConfigValid = fuelTankType !== "closed";
-
-        // Validate that all dampers are open.
-        const allDampersOpen =
-          document.getElementById("ventDamper1").checked &&
-          document.getElementById("ventDamper2").checked &&
-          document.getElementById("ventDamper3").checked;
-
-        // For this validation, Auxiliary Lighting is not used, so we skip it.
-        // Also, manual start selection is ignored in validation.
-
-        const allValid = [
-          onlyDSwitched,
-          voltageCorrect,
-          epaCorrect,
-          syncToggle,
-          visualCheck,
-          engineToggle,
-          rpmDialCorrect,
-          altTest,
-          resetValid,
-          ledsGreen,
-          controlPanelCorrect,
-          hvLockoutCorrect,
-          masterSelectorAuto,
-          fuelConfigValid,
-          allDampersOpen, // Add the new validation check
-        ].every((v) => v === true);
-
+        // Update the result display
         const result = document.getElementById("result");
-        if (allValid) {
+        if (validationResults.length === 0) {
           result.textContent = "✅ Generator Successfully Started!";
           result.style.color = "limegreen";
+          console.log("Startup validation successful!");
         } else {
-          result.textContent = "❌ Startup failed. Check all required steps.";
+          result.textContent = `❌ Startup failed. Check console for details.`;
           result.style.color = "red";
+          console.error("Validation failures:", validationResults);
+        }
+        console.groupEnd();
+      }
+
+      // Add hold completion tracking to hold buttons
+      function updateHoldButton(button, completed) {
+        button.dataset.holdcomplete = completed;
+        if (completed) {
+          button.style.backgroundColor = "#555";
+          button.disabled = true;
         }
       }
+
+      // Update the hold button event listeners to track completion
+      document.querySelectorAll(".hold-button").forEach((button) => {
+        let timer;
+        const holdTime = parseInt(button.dataset.holdtime);
+
+        function startHold() {
+          timer = setTimeout(() => {
+            updateHoldButton(button, true);
+            const statusSpan = button.nextElementSibling;
+            if (statusSpan) {
+              statusSpan.textContent = "✓ Hold Completed";
+            }
+          }, holdTime);
+        }
+
+        function cancelHold() {
+          clearTimeout(timer);
+        }
+
+        button.addEventListener("mousedown", startHold);
+        button.addEventListener("mouseup", cancelHold);
+        button.addEventListener("mouseleave", cancelHold);
+        button.addEventListener("touchstart", startHold);
+        button.addEventListener("touchend", cancelHold);
+      });
 
       // Example functionality for Ignition and Diagnostics buttons
       document
@@ -631,7 +666,17 @@
       document
         .getElementById("diagnosticsBtn")
         .addEventListener("click", function () {
-          alert("Diagnostics running...");
+          const diagnosticsStatus =
+            document.getElementById("diagnosticsStatus");
+          diagnosticsStatus.textContent = "Running diagnostics...";
+
+          // Simulate diagnostics running
+          setTimeout(() => {
+            diagnosticsStatus.textContent =
+              "✓ Diagnostics completed successfully";
+            this.style.backgroundColor = "#555";
+            this.disabled = true;
+          }, 2000);
         });
     </script>
   </body>
