@@ -347,13 +347,13 @@
           <label><input type="checkbox" id="hvLockout" /> Engage </label>
         </div>
 
-        <!-- Master Selector (Toggle: auto = engaged) -->
+        <!-- Master Selector (Dropdown: auto = engaged) -->
         <div class="form-group">
           <label>Master Selector</label>
-          <label class="toggle">
-            <input type="checkbox" id="masterSelector" />
-            <span class="slider"></span>
-          </label>
+          <select id="masterSelector">
+            <option value="manual">Manual</option>
+            <option value="auto">Auto</option>
+          </select>
         </div>
 
         <!-- Ignition Button -->
@@ -570,7 +570,7 @@
 
         // Master Selector must be set to AUTO.
         const masterSelectorAuto =
-          document.getElementById("masterSelector").checked;
+          document.getElementById("masterSelector").value === "auto";
 
         // Validate fuel tank configuration (fuel tank type must not be "closed")
         const fuelTankType = document.getElementById("fuelTankType").value;
