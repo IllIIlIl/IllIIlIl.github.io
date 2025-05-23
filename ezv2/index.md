@@ -93,7 +93,7 @@ This document outlines the correct startup procedure for any model of Hipower Sy
    - Otherwise → Leave selector in `Neutral`
 
 5. **EPA Rating:**  
-   - `Non-EPA` or `Tier 2` → Tap `Diagnostic` button **twice**  
+   - `Non-EPA` or `Tier 2` → Tap `Diagnostic` button **once**  
    - `Tier 3` or `Tier 4` → Wait for `Green LED` to flash **three times**
 
 6. **If alternator is Stamford 6W:**  
