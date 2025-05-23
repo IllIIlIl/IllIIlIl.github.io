@@ -207,7 +207,7 @@
           <label>EPA LED</label>
           <!--TODO: this should never be pressed, invalidate if so-->
           <button id="activateEPA" onclick="activateEPALED()">Activate</button>
-          <div id="epaLED" class="led" data-shouldbe="true"></div>
+          <div id="epaLED" class="led" data-shouldbe="false"></div>
         </div>
 
         <!-- Diagnostics -->
@@ -506,6 +506,7 @@
           document.getElementById("startStatus").textContent =
             "✓ START Hold Completed";
         }, 1000);
+        validateStartup();
       });
       startButton.addEventListener("mouseup", () => {
         clearTimeout(startTimer);
@@ -614,7 +615,9 @@
           result.style.color = "limegreen";
           console.log("Startup validation successful!");
         } else {
-          result.textContent = `❌ Startup failed. Check console for details.`;
+          result.textContent = `❌ Startup failed.`;
+          startButton.disabled = false;
+          startButton.style.backgroundColor = "#006400";
           result.style.color = "red";
           console.error("Validation failures:", validationResults);
         }
@@ -641,7 +644,6 @@
             const statusSpan = button.nextElementSibling;
             if (statusSpan) {
               statusSpan.textContent = "✓ Hold Completed";
-              validateStartup();
             }
           }, holdTime);
         }
