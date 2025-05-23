@@ -18,7 +18,7 @@ Certainly! Here's the revised version with corrected numbering and all emojis re
 
 ## Primary Start-Up Instructions
 
-1. **If the unit is rated above 1000 kW:**
+1. **If the unit's power is rated above 1000 kW:**
    → Flip `Switch D` to the `ON` position before startup.
 
 2. **If it supports both single and three phase systems:**
@@ -38,7 +38,7 @@ Certainly! Here's the revised version with corrected numbering and all emojis re
 5. **If alternator is Stamford 6W:**
    → Toggle `Alternator Sync` switch to `ON`.
 
-6. **If the enclosure is Level W:**
+6. **If the enclosure is Level 0:**
    → Ensure `Ventilation Dampers` are fully open.
 
    * If Level 2 → Open rear panel and confirm `Fan Clearance`
@@ -61,7 +61,7 @@ Certainly! Here's the revised version with corrected numbering and all emojis re
 11. Hold `ALT TEST` button for **3 seconds**.
 
 12. **If unit is RAL7035 color:**
-    → Confirm `Cabinet Light` is functional.
+    → Activate `Power switch C`.
 
 13. **If enclosure is open type:**
     → Perform visual check of `Radiator and Fan`.
