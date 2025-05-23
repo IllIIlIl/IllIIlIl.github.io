@@ -75,7 +75,7 @@ Certainly! Here's the revised version with corrected numbering and all emojis re
 16. **If range is custom configuration:**
     → Confirm **all five** `Top Panel LEDs` are `Green`.
 
-17. **If the generator uses natural gas:**
+17. **If the generator uses propane:**
     → Press and hold the `Green Ignition` button for **4 seconds**
 
 ---
