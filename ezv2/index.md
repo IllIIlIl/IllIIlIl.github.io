@@ -133,8 +133,8 @@ This document outlines the correct startup procedure for any model of Hipower Sy
 16. **If model number contains “6” two or more times:**  
     → Hold `System Reset` for **2 seconds**.
 
-17. **If voltage is higher than 480V:**  
-    → Engage `High Voltage Safety Lockout` → Turn `Red Key` clockwise.
+17. **If voltage is higher than 220V:**  
+    → Engage `High Voltage Safety`
 
 18. **If range is custom configuration:**  
     → Confirm **all five** `Top Panel LEDs` are `Green`.
