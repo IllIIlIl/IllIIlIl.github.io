@@ -119,8 +119,7 @@ This document outlines the correct startup procedure for any model of Hipower Sy
 11. **If fuel tank is standard base frame:**  
     → Open `Fuel Flow Valve` for **5 seconds**, then close.
 
-12. **If alternator is any Stamford model:**  
-    → Hold `ALT TEST` button for **3 seconds**.
+12. Hold `ALT TEST` button for **3 seconds**.
 
 13. **If using a closed bottom fuel tank:**  
     → Lift `Red Safety Cover` → Arm `Fuel Interlock`.
