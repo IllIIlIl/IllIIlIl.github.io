@@ -127,7 +127,6 @@ This document outlines the correct startup procedure for any model of Hipower Sy
 
 14. **If unit is RAL7035 color:**  
     → Confirm `Cabinet Light` is functional.  
-    - If custom color → Activate `Auxiliary Lighting`
 
 15. **If enclosure is open type:**  
     → Perform visual check of `Radiator and Fan`.
