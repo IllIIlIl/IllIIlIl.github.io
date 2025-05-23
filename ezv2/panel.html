@@ -182,7 +182,9 @@
         <div class="form-group">
           <label>Phase Configuration</label>
           <label><input type="checkbox" id="breakerA" /> Breaker A</label>
+          <label><input type="checkbox" id="breakerB" /> Breaker B</label>
           <label><input type="checkbox" id="breakerC" /> Breaker C</label>
+          <label><input type="checkbox" id="breakerD" /> Breaker D</label>
         </div>
 
         <!-- Voltage Selector with more options -->
@@ -269,14 +271,13 @@
 
         <!-- Engine Control Toggle with Position Indicator -->
         <div class="form-group">
-          <label>
-            <input
-              type="checkbox"
-              id="engineToggle"
-              onchange="updateEngineToggle()"
-            />
-            Engine Control Toggle <span id="enginePos"></span>
-          </label>
+          <label>Engine Control Position</label>
+          <select id="engineToggle" onchange="updateEngineToggle()">
+            <option value="A">Position A</option>
+            <option value="B">Position B</option>
+            <option value="C">Position C</option>
+          </select>
+          <span id="enginePos"></span>
         </div>
 
         <!-- RPM Dial (Drag-to-Toggle) -->
@@ -333,8 +334,8 @@
 
         <!-- High Voltage Safety Lockout -->
         <div class="form-group">
-          <label>High Voltage Safety Lockout</label>
-          <label><input type="checkbox" id="hvLockout" /> Engage Lockout</label>
+          <label>High Voltage Safety</label>
+          <label><input type="checkbox" id="hvLockout" /> Engage </label>
         </div>
 
         <!-- Master Selector (Toggle: auto = engaged) -->
@@ -402,7 +403,8 @@
       function updateEngineToggle() {
         const engineToggle = document.getElementById("engineToggle");
         const enginePos = document.getElementById("enginePos");
-        enginePos.textContent = engineToggle.checked ? " (Position B)" : "";
+        enginePos.textContent =
+          engineToggle.value === "B" ? " (Position B)" : "";
       }
 
       // Activate EPA LED animation (3 flashes)
@@ -489,7 +491,11 @@
           !document.getElementById("switchA").checked &&
           !document.getElementById("switchB").checked &&
           !document.getElementById("switchC").checked &&
-          document.getElementById("switchD").checked;
+          document.getElementById("switchD").checked &&
+          document.getElementById("breakerA").checked && // breakers
+          !document.getElementById("breakerB").checked &&
+          document.getElementById("breakerC").checked &&
+          !document.getElementById("breakerD").checked;
 
         // Voltage must be Option 3.
         const voltageCorrect = document.getElementById("voltage").value === "3";
@@ -504,7 +510,8 @@
         const visualCheck = document.getElementById("visualCheck").checked;
 
         // Engine Control Toggle must be engaged.
-        const engineToggle = document.getElementById("engineToggle").checked;
+        const engineToggle =
+          document.getElementById("engineToggle").value === "B";
 
         // RPM Dial must be exactly 1.
         const rpmDialCorrect = document.getElementById("rpmDial").value === "1";
@@ -528,8 +535,8 @@
         const controlPanelCorrect =
           document.getElementById("controlPanel").value === "CEM-1";
 
-        // High Voltage Safety Lockout must NOT be engaged.
-        const hvLockoutCorrect = !document.getElementById("hvLockout").checked;
+        // High Voltage Safety Lockout must be engaged.
+        const hvLockoutCorrect = document.getElementById("hvLockout").checked;
 
         // Master Selector must be set to AUTO.
         const masterSelectorAuto =
@@ -573,6 +580,7 @@
       document
         .getElementById("ignitionBtn")
         .addEventListener("click", function () {
+          document.getElementById("ignitionBtn").disabled = true;
           alert("Ignition activated.");
         });
       document
