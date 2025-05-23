@@ -285,7 +285,14 @@
         <!-- RPM Dial (Drag-to-Toggle) -->
         <div class="form-group">
           <label>RPM Dial</label>
-          <input type="range" id="rpmDial" min="0" max="2" step="1" value="0" />
+          <input
+            type="range"
+            id="rpmDial"
+            min="0"
+            max="3000"
+            step="100"
+            value="0"
+          />
           <span id="rpmDisplay">0</span>
         </div>
 
@@ -515,8 +522,9 @@
         const engineToggle =
           document.getElementById("engineToggle").value === "B";
 
-        // RPM Dial must be exactly 1.
-        const rpmDialCorrect = document.getElementById("rpmDial").value === "1";
+        // RPM Dial must be exactly 1800.
+        const rpmDialCorrect =
+          document.getElementById("rpmDial").value === "1800";
 
         // ALT TEST must be completed.
         const altTest = altTestPassed;
