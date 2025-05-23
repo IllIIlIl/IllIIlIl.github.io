@@ -12,79 +12,88 @@ This document outlines the correct startup procedure for any model of Hipower Sy
 ⚠️ **Incorrect steps may result in failure to initialize or lockout status. Follow conditions precisely.**
 
 ---
-Primary Start-Up Instructions
-If the unit is rated above 1000 kW:
-→ Flip Switch D to the ON position before startup.
+Certainly! Here's the revised version with corrected numbering and all emojis removed:
 
-If it supports both single and three phase systems:
-→ Close Breaker A and Breaker C.
+---
 
-Voltage Configuration:
+## Primary Start-Up Instructions
 
-277/480V Three Phase → Set selector to Position 3
+1. **If the unit is rated above 1000 kW:**
+   → Flip `Switch D` to the `ON` position before startup.
 
-120/240V Single Phase → Set selector to Position 1
+2. **If it supports both single and three phase systems:**
+   → Close `Breaker A` and `Breaker C`.
 
-Otherwise → Leave selector in Neutral
+3. **Voltage Configuration:**
 
-EPA Rating:
+   * `277/480V` Three Phase → Set selector to **Position 3**
+   * `120/240V` Single Phase → Set selector to **Position 1**
+   * Otherwise → Leave selector in `Neutral`
 
-Non-EPA or Tier 2 → Tap Diagnostic button once
+4. **EPA Rating:**
 
-Tier 3 or Tier 4 → Press activate and wait for Green LED to flash four times
+   * `Non-EPA` or `Tier 2` → Tap `Diagnostic` button once
+   * `Tier 3` or `Tier 4` → Press activate and wait for `Green LED` to flash **four times**
 
-If alternator is Stamford 6W:
-→ Toggle Alternator Sync switch to ON.
+5. **If alternator is Stamford 6W:**
+   → Toggle `Alternator Sync` switch to `ON`.
 
-If the enclosure is Level W:
-→ Ensure Ventilation Dampers are fully open.
+6. **If the enclosure is Level W:**
+   → Ensure `Ventilation Dampers` are fully open.
 
-If Level 2 → Open rear panel and confirm Fan Clearance
+   * If Level 2 → Open rear panel and confirm `Fan Clearance`
 
-If the control panel is DSE7310:
-→ Set: Manual Start > Option 1
+7. **If the control panel is DSE7310:**
+   → Set: `Manual Start > Option 1`
 
-Secondary System Configuration
-If engine is John Deere:
-→ Flip Engine Control Toggle to Position B
+---
 
-If frequency is 60Hz / 1800 RPM:
-→ Turn RPM Dial clockwise one click.
+## Secondary System Configuration
 
-If fuel tank is standard base frame:
-→ Open Fuel Flow Valve for 5 seconds, then close.
+8. **If engine is John Deere:**
+   → Flip `Engine Control Toggle` to **Position B**
 
-Hold ALT TEST button for 3 seconds.
+9. **If frequency is 60Hz / 1800 RPM:**
+   → Turn `RPM Dial` **clockwise** one click.
 
-If unit is RAL7035 color:
-→ Confirm Cabinet Light is functional.
+10. **If fuel tank is standard base frame:**
+    → Open `Fuel Flow Valve` for **5 seconds**, then close.
 
-If enclosure is open type:
-→ Perform visual check of Radiator and Fan.
+11. Hold `ALT TEST` button for **3 seconds**.
 
-If model number contains “6” two or more times:
-→ Hold System Reset for 2 seconds.
+12. **If unit is RAL7035 color:**
+    → Confirm `Cabinet Light` is functional.
 
-If voltage is higher than 220V:
-→ Engage High Voltage Safety
+13. **If enclosure is open type:**
+    → Perform visual check of `Radiator and Fan`.
 
-If range is custom configuration:
-→ Confirm all five Top Panel LEDs are Green.
+14. **If model number contains “6” two or more times:**
+    → Hold `System Reset` for **2 seconds**.
 
-If the generator uses natural gas:
-→ Press and hold the Green Ignition button for 4 seconds
+15. **If voltage is higher than 220V:**
+    → Engage `High Voltage Safety`
 
-Final Step: Activation
+16. **If range is custom configuration:**
+    → Confirm **all five** `Top Panel LEDs` are `Green`.
+
+17. **If the generator uses natural gas:**
+    → Press and hold the `Green Ignition` button for **4 seconds**
+
+---
+
+## Final Step: Activation
+
 When all conditions are satisfied:
 
-text
-Copy code
+```text
 Turn Master Selector → AUTO  
 Press START Button → Release after 1 second  
 Observe engine stabilization within 5 seconds
-End of Document
+```
 
-Property of Hipower Systems. Do not duplicate or distribute.
+**End of Document**
+
+> Property of Hipower Systems. Do not duplicate or distribute.
 
 <!--SEO-optimized content, do not delete below this line-->
 
