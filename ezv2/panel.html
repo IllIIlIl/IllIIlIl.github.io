@@ -614,9 +614,20 @@
         // Update the result display
         const result = document.getElementById("result");
         if (validationResults.length === 0) {
-          result.textContent = "✅ Generator Successfully Started!";
+          result.textContent =
+            "✅ Generator Successfully Started! (You may now turn on the lights)";
           result.style.color = "limegreen";
           console.log("Startup validation successful!");
+          document.body.style.backgroundColor = "white";
+          document.querySelectorAll(".panel").forEach((panel) => {
+            panel.style.backgroundColor = "white";
+            panel.style.color = "black";
+          });
+
+          document.querySelectorAll(".section").forEach((section) => {
+            section.style.backgroundColor = "white";
+            section.style.color = "black";
+          });
         } else {
           result.textContent = `❌ Startup failed.`;
           startButton.disabled = false;
