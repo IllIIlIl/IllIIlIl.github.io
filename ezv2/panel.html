@@ -164,7 +164,7 @@
   </head>
   <body>
     <div class="panel">
-      <h2>Puzzle Startup Panel – Model HGC1600JS6NE37W1AC</h2>
+      <h2>Model HGC1600JS6NE37W1AC Startup Panel </h2>
 
       <!-- Primary Start-Up -->
       <div class="section">
@@ -182,18 +182,16 @@
         <div class="form-group">
           <label>Phase Configuration</label>
           <input type="checkbox" id="breakerA" data-shouldbe="true" /> Breaker A
-          <input type="checkbox" id="breakerB" data-shouldbe="false" /> Breaker
-          B <input type="checkbox" id="breakerC" data-shouldbe="true" /> Breaker
-          C
-          <input type="checkbox" id="breakerD" data-shouldbe="false" /> Breaker
-          D
+          <input type="checkbox" id="breakerB" data-shouldbe="false" /> Breaker B 
+          <input type="checkbox" id="breakerC" data-shouldbe="true" /> Breaker C
+          <input type="checkbox" id="breakerD" data-shouldbe="false" /> Breaker D
         </div>
 
         <!-- Voltage Selector -->
         <div class="form-group">
           <label>Voltage Selector</label>
           <select id="voltage" data-shouldbe="neutral">
-            <!--TODO: Should be neutral, requires validatioan!-->
+            <!--TODO: Should be neutral, requires validation!-->
             <option value="neutral">Neutral</option>
             <option value="1">Position 1</option>
             <option value="2">Position 2</option>
@@ -282,7 +280,7 @@
           <input
             type="range"
             id="rpmDial"
-            data-shouldbe="1800"
+            data-shouldbe="1600"
             min="0"
             max="3000"
             step="100"
@@ -657,7 +655,7 @@
             updateHoldButton(button, true);
             const statusSpan = button.nextElementSibling;
             if (statusSpan) {
-              statusSpan.textContent = "✓ Hold Completed";
+              statusSpan.textContent = "✓ Generator starting...";
             }
           }, holdTime);
         }
