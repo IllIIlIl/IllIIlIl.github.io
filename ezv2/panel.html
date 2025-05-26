@@ -383,14 +383,12 @@
 
         <!-- START Button -->
         <div class="form-group">
-          <label>START (Press and hold for at least 1 second)</label>
+          <label>START</label>
           <button
             id="startButton"
-            class="hold-button"
-            data-shouldbe="true"
-            data-holdtime="1000"
+           
           >
-            Hold START
+            Press START
           </button>
           <span id="startStatus"></span>
         </div>
@@ -504,6 +502,10 @@
           document.getElementById("startStatus").textContent =
             "✓ START Hold Completed";
         }, 1000);
+        validateStartup();
+      });
+      startButton.addEventListener("click", () => {
+        
         validateStartup();
       });
       startButton.addEventListener("mouseup", () => {
