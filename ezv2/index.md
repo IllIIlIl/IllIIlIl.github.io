@@ -41,7 +41,7 @@ Certainly! Here's the revised version with corrected numbering and all emojis re
 6. **If the enclosure is Level 0:**
    → Ensure `Ventilation Dampers` are fully open.
 
-   * If Level 2 → Open rear panel and confirm `Fan Clearance`
+   * If Level 2 →  `Seal secondary intake`
 
 7. **If the control panel is DSE7310:**
    → Set: `Manual Start > Option 1`
@@ -50,34 +50,37 @@ Certainly! Here's the revised version with corrected numbering and all emojis re
 
 ## Secondary System Configuration
 
-8. **If engine is John Deere:**
-   → Flip `Engine Control Toggle` to **Position B**
+8. **If engine manufacturer is John Deere:**
+   → Flip `Engine Control` to **Position B**
+   **Otherwise:**
+   → Flip to **Position B**
 
-9. **Turn RPM Dial to the Specified RPM**
+10. **Turn RPM Dial to the Specified RPM**
 
-10. **If fuel tank is standard base frame:**
+11. **If fuel tank is standard base frame:**
     → Open `Fuel Flow Valve` for **5 seconds**, then close.
 
-11. Hold `ALT TEST` button for **3 seconds**.
+12. Hold `ALT TEST` button for **3 seconds**.
 
-12. **If unit is RAL7035 color:**
+13. **If unit is RAL7035 color:**
     → Activate `Power switch C`.
 
-13. **If enclosure is open type:**
+14. **If enclosure is open type:**
     → Perform visual check of `Radiator and Fan`.
 
-14. **If model number contains “6” two or more times:**
+15. **If model number contains “6” two or more times:**
     → Hold `System Reset` for **2 seconds**.
 
-15. **If voltage is higher than 220V:**
+16. **If voltage is higher than 220V:**
     → Engage `High Voltage Safety`
 
-16. **If range is custom configuration:**
+17. **If range is custom configuration:**
     → Confirm **all five** `Top Panel LEDs` are `Green`.
 
-17. **If the generator uses propane:**
-    → Press and hold the `Green Ignition` button for **4 seconds**
-
+18. **If the generator uses diesel:**
+    → Arm fuel interlock, then press the `Green Ignition` button.
+    **Otherwise:**
+    →Press the `Green Ignition` button.
 ---
 
 ## Final Step: Activation
