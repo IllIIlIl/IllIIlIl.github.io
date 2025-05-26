@@ -3,11 +3,11 @@
 @import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Roboto:wght@400;700&display=swap);body,p{font-family:'IBM Plex Mono',monospace}body{background:#f9f9f9;color:#1a1a1a;margin:2em auto;max-width:800px;line-height:1.6;padding:2em;border:1px solid #ddd;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05)}h1,h2,h3{font-family:Roboto,sans-serif;font-weight:700;color:#2c3e50;border-bottom:1px solid #ccc;padding-bottom:.25em}h1{font-size:2rem;margin-top:0}h2{font-size:1.5rem;margin-top:2em}code,pre{background:#eee;padding:.2em .4em;border-radius:4px;font-family:'IBM Plex Mono',monospace}pre{background:#f3f3f3;padding:1em;overflow-x:auto;border-left:4px solid #007acc}ul{margin-left:1.5em}strong{color:#000}blockquote{border-left:4px solid #ccc;padding-left:1em;color:#555;font-style:italic}
 </style>
 
-# Hipower Systems Generator Activation
+# High-power Systems Generator Activation
 **Document ID:** HGC-OPS-ACT1600  
 **Revision:** 2.1  
 
-This document outlines the correct startup procedure for any model of Hipower Systems Generator. Use the model number and provided reference chart to determine which actions to perform.
+This document outlines the correct startup procedure for any model of High-power Systems Generator. Use the model number and provided reference chart to determine which actions to perform.
 
 ⚠️ **Incorrect steps may result in failure to initialize or lockout status. Follow conditions precisely.**
 
@@ -95,7 +95,7 @@ Observe engine stabilization within 5 seconds
 
 **End of Document**
 
-> Property of Hipower Systems. Do not duplicate or distribute.
+> Property of High-power Systems. Do not duplicate or distribute.
 
 <!--SEO-optimized content, do not delete below this line-->
 
