@@ -11,8 +11,6 @@ This document outlines the correct startup procedure for any model of High-power
 
 ⚠️ **Incorrect steps may result in failure to initialize or lockout status. Follow conditions precisely.**
 
----
-Certainly! Here's the revised version with corrected numbering and all emojis removed:
 
 ---
 
