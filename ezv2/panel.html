@@ -164,7 +164,7 @@
   </head>
   <body>
     <div class="panel">
-      <h2>Model HGC1600JS6NE37W1AC Startup Panel </h2>
+      <h2>Model HGC1600JS6NE37W1AC Startup Panel</h2>
 
       <!-- Primary Start-Up -->
       <div class="section">
@@ -182,9 +182,11 @@
         <div class="form-group">
           <label>Phase Configuration</label>
           <input type="checkbox" id="breakerA" data-shouldbe="true" /> Breaker A
-          <input type="checkbox" id="breakerB" data-shouldbe="false" /> Breaker B 
-          <input type="checkbox" id="breakerC" data-shouldbe="true" /> Breaker C
-          <input type="checkbox" id="breakerD" data-shouldbe="false" /> Breaker D
+          <input type="checkbox" id="breakerB" data-shouldbe="false" /> Breaker
+          B <input type="checkbox" id="breakerC" data-shouldbe="true" /> Breaker
+          C
+          <input type="checkbox" id="breakerD" data-shouldbe="false" /> Breaker
+          D
         </div>
 
         <!-- Voltage Selector -->
@@ -204,7 +206,9 @@
         <div class="form-group">
           <label>EPA LED</label>
           <!--TODO: this should never be pressed, invalidate if so-->
-          <button id="activateEPA" onclick="activateEPALED()">Activate (Press again to deactivate)</button>
+          <button id="activateEPA" onclick="toggleEPALED()">
+            EPA LED: <span id="epaStatus">Click to enable</span>
+          </button>
           <div id="epaLED" class="led" data-shouldbe="false"></div>
         </div>
 
@@ -384,12 +388,7 @@
         <!-- START Button -->
         <div class="form-group">
           <label>START</label>
-          <button
-            id="startButton"
-           
-          >
-            Press START
-          </button>
+          <button id="startButton">Press START</button>
           <span id="startStatus"></span>
         </div>
       </div>
@@ -432,15 +431,26 @@
       }
 
       // Activate EPA LED animation (3 flashes)
-      function activateEPALED() {
+      function toggleEPALED() {
         const led = document.getElementById("epaLED");
-        //if (epaActivated) return;
-        led.classList.add("flashing");
-        setTimeout(() => {
+        const statusText = document.getElementById("epaStatus");
+
+        if (epaActivated) {
+          // Disable EPA LED
           led.classList.remove("flashing");
-          led.style.backgroundColor = "limegreen";
-          epaActivated = !epaActivated;
-        }, 1500);
+          led.style.backgroundColor = "";
+          statusText.textContent = "Click to enable";
+          epaActivated = false;
+        } else {
+          // Enable EPA LED
+          led.classList.add("flashing");
+          statusText.textContent = "Click again to disable";
+          setTimeout(() => {
+            led.classList.remove("flashing");
+            led.style.backgroundColor = "limegreen";
+          }, 1500);
+          epaActivated = true;
+        }
       }
 
       // ALT TEST hold button (3 seconds)
@@ -505,7 +515,6 @@
         validateStartup();
       });
       startButton.addEventListener("click", () => {
-        
         validateStartup();
       });
       startButton.addEventListener("mouseup", () => {
